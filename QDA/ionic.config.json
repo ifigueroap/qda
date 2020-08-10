@@ -1,0 +1,7 @@
+{
+  "name": "QDA",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
