@@ -1,58 +1,16 @@
-<ng-sidebar-container>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="_toggleSidebar()">
+        <ion-icon slot="icon-only" name="menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      QDA
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <!-- A sidebar -->
-  <ng-sidebar
-    [(opened)]="_opened"
-    mode="push"
-    position="left"
-    [(showBackdrop)]="_backdrop"
-    autoCollapseOnInit="false"
-    trapFocus="true"
-  >
-
-    <p>Project: Sidebar contents AAAAAA</p>
-
-  <ul>
-    <li>Documents</li>
-    <li>Codes</li>
-  </ul>
-
-  </ng-sidebar>
-
-  <!-- Page content
-  <div ng-sidebar-content>
-    <button (click)="_toggleSidebar()">Toggle sidebar</button>
-  </div> -->
-
-  <div ng-sidebar-content>
-
-    <ion-header>
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-button (click)="_toggleSidebar()">
-            <ion-icon slot="icon-only" name="menu"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-        <ion-title>
-          QDA
-        </ion-title>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content [fullscreen]="true" id="main">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Blank</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
-      <div id="container">
-        <strong>Ready to create an app?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer"
-            href="https://ionicframework.com/docs/components">UI Components</a></p>
-      </div>
-
-    </ion-content>
-  </div>
-
-</ng-sidebar-container>
+<ion-content [fullscreen]="true" id="main">
+   AAAAA  
+</ion-content>
