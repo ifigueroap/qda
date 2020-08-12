@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -12,38 +13,46 @@ import { NgxElectronModule } from 'ngx-electron';
 import { SidebarModule } from 'ng-sidebar';
 import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
 import { createLogger } from 'redux-logger';
-//import { rootReducer } from './reducers';
-import { Statement } from '@angular/compiler';
-
-function rootReducer(state, action) {
-  return state;
-}
+import { rootReducer } from './store/reducers/';
+import { Actions } from './store/actions';
+import { Project } from './types/project';
 
 export interface IAppState {
-  projects: string[];
+  projects: Map<string, Project>;
 }
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-      BrowserModule
+    BrowserModule
     , IonicModule.forRoot()
     , AppRoutingModule
     , NgxElectronModule
     , SidebarModule.forRoot()
     , NgReduxModule
+    , FormsModule
   ],
   providers: [
-      StatusBar,
+    StatusBar,
     , SplashScreen
     , { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     , DevToolsExtension
+    , Actions
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(ngRedux: NgRedux<IAppState>) {
-    ngRedux.configureStore(rootReducer, { projects: ['A', 'B', 'C']}, [createLogger()]);
+
+    const initialState = {
+      projects: new Map([
+        ["A1", new Project('A1')],
+        ["B2", new Project('B2')],
+        ["C3", new Project('C3')]
+      ])
+    };
+
+    ngRedux.configureStore(rootReducer, initialState, [createLogger()]);
   }
 }

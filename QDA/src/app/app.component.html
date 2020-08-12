@@ -4,14 +4,44 @@
     <ion-menu contentId="pages-content" type="overlay">
       <ion-header>
         <ion-toolbar>
-          <ion-title>Menú</ion-title>
+          <ion-title>{{ data.selectedProject }}</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
+        <ion-button (click)="addProject('hola')">Add Project</ion-button>
+        <ion-item>
+          <ion-label>Select Project</ion-label>
+          <ion-select
+            name="project" 
+            [(ngModel)]="data.selectedProject">
+            <ion-select-option *ngFor="let projName of (projects$ | async).entries()" [value]="projName[1]">
+              {{ projName[0] }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+          
+        <ion-list>
+          <ion-list-header>
+            <ion-label>Documents ({{ data.selectedProject && data.selectedProject.documents.length || 0 }})</ion-label>
+          </ion-list-header>          
+          <ion-item *ngFor="let item of data.selectedProject && data.selectedProject.documents || []"> -->
+            <a [routerLink]="['/document/', data.selectedProject.name, item]">{{ item }}</a>
+          </ion-item>          
+        </ion-list>
+
+        <ion-list>
+          <ion-list-header>
+            <ion-label>Codes ({{ data.selectedProject && data.selectedProject.codes.length || 0 }})</ion-label>
+          </ion-list-header>          
+          <ion-item *ngFor="let item of data.selectedProject && data.selectedProject.codes || []"> -->
+            {{ item }}
+          </ion-item>
+        </ion-list>       
+
+        <!-- <ion-button>{{ data.selectedProject }}</ion-button>        
         <ion-button *ngFor="let projName of projects$ | async" [routerLink]="['/project']">Project {{ projName }}</ion-button>
         <ion-button [routerLink]="['/home']">Go Home</ion-button>
         <ion-button *ngFor="let docId of docs" [routerLink]="['/document/', docId]">Go To Docs {{ docId }}</ion-button>
-        <ion-button [routerLink]="['/codes']">Go To Codes</ion-button>
+        <ion-button [routerLink]="['/codes']">Go To Codes</ion-button> -->
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="pages-content"></ion-router-outlet>
