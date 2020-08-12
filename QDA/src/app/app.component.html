@@ -8,7 +8,9 @@
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        ...
+        <ion-button [routerLink]="['/home']">Go Home</ion-button>
+        <ion-button *ngFor="let docId of docs" [routerLink]="['/document/', docId]">Go To Docs {{ docId }}</ion-button>
+        <ion-button [routerLink]="['/codes']">Go To Codes</ion-button>
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="pages-content"></ion-router-outlet>
