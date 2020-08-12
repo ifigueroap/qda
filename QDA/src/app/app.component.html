@@ -8,6 +8,7 @@
         </ion-toolbar>
       </ion-header>
       <ion-content>
+        <ion-button *ngFor="let projName of projects$ | async" [routerLink]="['/project']">Project {{ projName }}</ion-button>
         <ion-button [routerLink]="['/home']">Go Home</ion-button>
         <ion-button *ngFor="let docId of docs" [routerLink]="['/document/', docId]">Go To Docs {{ docId }}</ion-button>
         <ion-button [routerLink]="['/codes']">Go To Codes</ion-button>

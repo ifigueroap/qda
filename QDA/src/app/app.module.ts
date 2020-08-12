@@ -10,6 +10,18 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NgxElectronModule } from 'ngx-electron';
 import { SidebarModule } from 'ng-sidebar';
+import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
+import { createLogger } from 'redux-logger';
+//import { rootReducer } from './reducers';
+import { Statement } from '@angular/compiler';
+
+function rootReducer(state, action) {
+  return state;
+}
+
+export interface IAppState {
+  projects: string[];
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,12 +32,18 @@ import { SidebarModule } from 'ng-sidebar';
     , AppRoutingModule
     , NgxElectronModule
     , SidebarModule.forRoot()
+    , NgReduxModule
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+      StatusBar,
+    , SplashScreen
+    , { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    , DevToolsExtension
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(ngRedux: NgRedux<IAppState>) {
+    ngRedux.configureStore(rootReducer, { projects: ['A', 'B', 'C']}, [createLogger()]);
+  }
+}

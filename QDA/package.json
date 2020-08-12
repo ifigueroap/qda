@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-redux/store": "^9.0.0",
     "@angular/common": "~9.1.6",
     "@angular/core": "~9.1.6",
     "@angular/forms": "~9.1.6",
@@ -26,8 +27,12 @@
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^5.0.0",
     "electron": "^9.2.0",
+    "flux-standard-action": "^2.1.1",
     "ng-sidebar": "^9.4.2",
     "ngx-electron": "^2.2.0",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-logger": "^3.0.6",
     "rxjs": "~6.5.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
