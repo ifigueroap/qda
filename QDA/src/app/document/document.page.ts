@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { select, NgRedux } from '@angular-redux/store';
+import { Project, QDADocument } from '../types/project';
+import { IAppState } from '../app.module';
 
 @Component({
   selector: 'app-document',
@@ -8,15 +12,30 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DocumentPage implements OnInit {
 
-  id: number;
+  @select() readonly projects$: Observable<Map<string, Project>>;
+  document: Observable<QDADocument>;
+
+  documentName: string;
+  projectName: string; 
   private sub: any;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+      private route: ActivatedRoute
+    , private ngRedux: NgRedux<IAppState>
+    ) {      
+
+    }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.id = +params['id'];
+      this.documentName = params['id'];
+      this.projectName = params['projectId'];
+      this.document = this.ngRedux.select((state) => {
+        return state.projects.get(this.projectName).documents.filter(doc => doc.name === this.documentName)[0];
+      });
     });
-  }k
+  }
+
+  
 
 }

@@ -12,12 +12,24 @@ const routes: Routes = [
     pathMatch: 'full'
   },  
   {
-    path: 'document/:id',
+    path: 'document/:projectId/:id',
     loadChildren: () => import('./document/document.module').then( m => m.DocumentPageModule)
   },
   {
     path: 'codes',
     loadChildren: () => import('./codes/codes.module').then( m => m.CodesPageModule)
+  },
+  {
+    path: 'add-code',
+    loadChildren: () => import('./add-code/add-code.module').then( m => m.AddCodePageModule)
+  },
+  {
+    path: 'add-project',
+    loadChildren: () => import('./add-project/add-project.module').then( m => m.AddProjectPageModule)
+  },
+  {
+    path: 'add-document',
+    loadChildren: () => import('./add-document/add-document.module').then( m => m.AddDocumentPageModule)
   },
 ];
 

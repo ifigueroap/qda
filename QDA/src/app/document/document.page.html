@@ -1,9 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Document {{ id }}</ion-title> 
+    <ion-title>Document: {{ projectName }}/{{ documentName }}</ion-title> 
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-textarea readonly>
+  {{ (document | async).contents }}
+  </ion-textarea>
 </ion-content>
