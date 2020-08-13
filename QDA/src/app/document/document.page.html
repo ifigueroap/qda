@@ -1,16 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Document {{ id }}</ion-title> 
+    <ion-title>Document: {{ projectName }}/{{ documentName }}</ion-title> 
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let projName of (projects$ | async).entries()">
-      {{ projName[0] }}
-    </ion-item>
-
-    {{ (document | async) }}
-  </ion-list>
-
+  <ion-textarea readonly>
+  {{ (document | async).contents }}
+  </ion-textarea>
 </ion-content>

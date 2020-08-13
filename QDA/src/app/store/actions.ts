@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { dispatch } from "@angular-redux/store";
-import { Project, Code } from '../types/project';
+import { Project, QDACode } from '../types/project';
 
 @Injectable()
 export class Actions {
@@ -12,8 +12,14 @@ export class Actions {
     });
 
     @dispatch()
-    addCodeToProject = (project: Project, code: Code) => ({
+    addCodeToProject = (project: Project, code: QDACode) => ({
         type: "ADD_CODE",
         payload: [project, code]
+    });
+
+    @dispatch()
+    addDocumentToProject = (project: Project, newFilename: string, newFileContents: string) => ({
+        type: "ADD_DOCUMENT",
+        payload: [project, newFilename, newFileContents]
     });
 }

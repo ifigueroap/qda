@@ -1,16 +1,29 @@
-export type Code = string;
-export type Document = string;
+export type QDACode = string;
+
+export class QDADocument {
+    name: string;
+    contents: string;
+
+    constructor(name, contents) {
+        this.name = name;
+        this.contents = contents;
+    }
+
+    toString() {
+        return this.name;
+    }
+}
 
 export class Project {
 
     name: string;
-    codes: Array<Code>;
-    documents: Array<Document>;
+    codes: Array<QDACode>;
+    documents: Array<QDADocument>;
     
     constructor(name) {
         this.name = name;
         this.codes = [];
-        this.documents = [name+"_Doc1", name+"_Doc2", name+"_Doc3", name+"_Doc4"];
+        this.documents = [];
     }
 
     toString() {

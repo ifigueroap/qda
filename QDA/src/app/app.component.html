@@ -30,14 +30,14 @@
               <ion-title>Documents ({{ (documents$ | async)?.length || 0 }})
               </ion-title>
               <ion-buttons slot="secondary">
-                <ion-button [disabled]="!selectedProject">
+                <ion-button [disabled]="!selectedProject" (click)="addDocumentModal()">
                   <ion-icon name="add-circle-outline"></ion-icon>
                 </ion-button>
               </ion-buttons>
             </ion-toolbar>
           </ion-list-header>
           <ion-item *ngFor="let item of (documents$ | async) || []"> -->
-            <a [routerLink]="['/document/', selectedProjectSubject.name, item]">{{ item }}</a>
+            <a [routerLink]="['/document/', selectedProject.name, item.name]">{{ item.name }}</a>
           </ion-item>
         </ion-list>
 

@@ -8,9 +8,10 @@ import { NgRedux, select, DevToolsExtension } from "@angular-redux/store";
 import { Observable, Subject } from "rxjs";
 import { IAppState } from './app.module';
 import { Actions } from './store/actions';
-import { Project, Code } from './types/project';
+import { Project, QDACode, QDADocument } from './types/project';
 import { AddProjectPage } from './add-project/add-project.page';
 import { AddCodePage } from './add-code/add-code.page';
+import { AddDocumentPage } from './add-document/add-document.page';
 
 @Component({
   selector: 'app-root',
@@ -18,12 +19,12 @@ import { AddCodePage } from './add-code/add-code.page';
   styleUrls: ['app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush // ?
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   @select(state=>state.projects) projects$: Observable<Map<string, Project>>;
-  codes$: Observable<Array<Code>>;
-  documents$: Observable<Array<Document>>;
-  
+  codes$: Observable<Array<QDACode>>;
+  documents$: Observable<Array<QDADocument>>;
+
   selectedProjectSubject: Subject<Project> = new Subject<Project>();
   selectedProject: Project;
 
@@ -50,12 +51,7 @@ export class AppComponent implements OnInit {
       });
       
     });
-  }
-
-  ngOnInit() {
-    //this.projects$ = this.ngRedux.select('projects');
-    //this.codes$ = this.ngRedux.select(state => state.projects[this.selectedProject?.name]?.codes || [] );
-  }
+  }  
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -102,14 +98,39 @@ export class AppComponent implements OnInit {
     return await modal.present();
   }
 
+  async addDocumentModal() {
+    console.log("Opening Add Document Modal");
+    const modal = await this.modalController.create({
+      component: AddDocumentPage,
+      cssClass: 'qda-modal',
+    });
+
+    modal.onDidDismiss().then((data) => {
+      console.log("ADDING NEW DOCUMENT");
+      console.log(data);
+      const newFilename = data.data['newFilename'];
+      const newFileContents = data.data['newFileContents'];
+      console.log(newFilename);
+      this.addDocument(this.selectedProject, newFilename, newFileContents);
+    });
+
+    return await modal.present();
+
+  }
+
   addProject(name) {
     this.actions.addProject(name);
   }
 
   addCode(project, newCodeName) {    
     console.log("ADDING NEW CODE: " + newCodeName);
-    this.actions.addCodeToProject(project, newCodeName);
-    this.emitSelectedProject({ target: { value: this.selectedProject }});    
+    this.actions.addCodeToProject(project, newCodeName);    
+  }
+
+  addDocument(project, newFilename, newFileContents) {    
+    //console.log("ADDING NEW DOCUMENT: " + newFilename);
+    //console.log(newFileContents)
+    this.actions.addDocumentToProject(project, newFilename, newFileContents);
   }
 
   emitSelectedProject(evt) {    

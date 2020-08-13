@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'add-project',
     loadChildren: () => import('./add-project/add-project.module').then( m => m.AddProjectPageModule)
   },
+  {
+    path: 'add-document',
+    loadChildren: () => import('./add-document/add-document.module').then( m => m.AddDocumentPageModule)
+  },
 ];
 
 @NgModule({
