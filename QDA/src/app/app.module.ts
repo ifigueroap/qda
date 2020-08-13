@@ -46,13 +46,9 @@ export class AppModule {
   constructor(ngRedux: NgRedux<IAppState>) {
 
     const initialState = {
-      projects: new Map([
-        ["A1", new Project('A1')],
-        ["B2", new Project('B2')],
-        ["C3", new Project('C3')]
-      ])
+      projects: new Map<string, Project>([["Demo Project", new Project("Demo Project")]])
     };
-
+    
     ngRedux.configureStore(rootReducer, initialState, [createLogger()]);
   }
 }

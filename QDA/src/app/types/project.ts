@@ -1,13 +1,16 @@
+export type Code = string;
+export type Document = string;
+
 export class Project {
 
     name: string;
-    codes: Array<string>;
-    documents: Array<string>;
+    codes: Array<Code>;
+    documents: Array<Document>;
     
     constructor(name) {
         this.name = name;
-        this.codes = ["foo", "bar", "baz"];
-        this.documents = [name+"_Doc1", name+"_Doc2", name+"_Doc3", name+"_Doc4"]
+        this.codes = [];
+        this.documents = [name+"_Doc1", name+"_Doc2", name+"_Doc3", name+"_Doc4"];
     }
 
     toString() {

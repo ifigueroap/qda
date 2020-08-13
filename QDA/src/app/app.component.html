@@ -2,40 +2,60 @@
   <!-- Resizable: https://codepen.io/liamdebeasi/pen/KKdodjd -->
   <ion-split-pane contentId="pages-content">
     <ion-menu contentId="pages-content" type="overlay">
+
       <ion-header>
-        <ion-toolbar>
-          <ion-title>{{ data.selectedProject }}</ion-title>
-        </ion-toolbar>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="10">
+              <ion-select name="project" (ionChange)="emitSelectedProject($event)" placeholder="Select project...">
+                <ion-select-option *ngFor="let projName of (projects$ | async).entries()" [value]="projName[1]">
+                  {{ projName[0] }}</ion-select-option>
+              </ion-select>
+            </ion-col>
+            <ion-col size="2">
+              <ion-button (click)="addProjectModal()">
+                <ion-icon name="add-circle-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-header>
+
+      <!-- <ion-title>{{ data.selectedProject }}</ion-title> -->
+      <!-- <ion-button (click)="addProject('hola')">Add Project</ion-button> -->
       <ion-content>
-        <ion-button (click)="addProject('hola')">Add Project</ion-button>
-        <ion-item>
-          <ion-label>Select Project</ion-label>
-          <ion-select
-            name="project" 
-            [(ngModel)]="data.selectedProject">
-            <ion-select-option *ngFor="let projName of (projects$ | async).entries()" [value]="projName[1]">
-              {{ projName[0] }}</ion-select-option>
-          </ion-select>
-        </ion-item>
-          
         <ion-list>
           <ion-list-header>
-            <ion-label>Documents ({{ data.selectedProject && data.selectedProject.documents.length || 0 }})</ion-label>
-          </ion-list-header>          
-          <ion-item *ngFor="let item of data.selectedProject && data.selectedProject.documents || []"> -->
-            <a [routerLink]="['/document/', data.selectedProject.name, item]">{{ item }}</a>
-          </ion-item>          
+            <ion-toolbar>
+              <ion-title>Documents ({{ (documents$ | async)?.length || 0 }})
+              </ion-title>
+              <ion-buttons slot="secondary">
+                <ion-button [disabled]="!selectedProject">
+                  <ion-icon name="add-circle-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-list-header>
+          <ion-item *ngFor="let item of (documents$ | async) || []"> -->
+            <a [routerLink]="['/document/', selectedProjectSubject.name, item]">{{ item }}</a>
+          </ion-item>
         </ion-list>
 
         <ion-list>
           <ion-list-header>
-            <ion-label>Codes ({{ data.selectedProject && data.selectedProject.codes.length || 0 }})</ion-label>
-          </ion-list-header>          
-          <ion-item *ngFor="let item of data.selectedProject && data.selectedProject.codes || []"> -->
+            <ion-toolbar>
+              <ion-title>Codes ({{ (codes$ | async)?.length || 0 }})</ion-title>
+              <ion-buttons slot="secondary">
+                <ion-button [disabled]="!selectedProject" (click)="addCodeModal()">
+                  <ion-icon name="add-circle-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-list-header>
+          <ion-item *ngFor="let item of (codes$ | async) || []"> -->
             {{ item }}
           </ion-item>
-        </ion-list>       
+        </ion-list>
 
         <!-- <ion-button>{{ data.selectedProject }}</ion-button>        
         <ion-button *ngFor="let projName of projects$ | async" [routerLink]="['/project']">Project {{ projName }}</ion-button>
