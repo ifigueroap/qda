@@ -13,7 +13,7 @@ import { DocumentPage } from './document.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    DocumentPageRoutingModule
+    DocumentPageRoutingModule,    
   ],
   declarations: [DocumentPage]
 })
