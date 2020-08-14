@@ -4,8 +4,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-textarea readonly>
-  {{ (document | async).contents }}
-  </ion-textarea>
+<ion-content id="documentContent">
+  <!-- <quill-editor
+    [readOnly]="true"
+    format="text"
+    [(ngModel)]="documentText">
+  </quill-editor> -->
+<ion-textarea>
+  {{ (document$ | async).contents }}
+</ion-textarea>
+  
 </ion-content>

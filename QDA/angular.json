@@ -37,9 +37,22 @@
               },
               {
                 "input": "src/global.scss"
+              },              
+              {
+                "input": "lib/annotator/annotator.min.css"
+              },
+              {
+                "input": "lib/select2.min.css"
               }
             ],
-            "scripts": []
+            "scripts": ["./node_modules/jquery/dist/jquery.min.js",
+                        "lib/underscore.js",
+                        "lib/backbone.js",
+                        "lib/select2.min.js",
+                        "lib/utils.js",
+                        "lib/annotator/annotator-full.min.js",
+                        "lib/annotator.plugin.tags.js",
+                        "lib/annotator.plugin.storelogger.js"]
           },
           "configurations": {
             "production": {
@@ -74,7 +87,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "app:build"
+            "browserTarget": "app:build"            
           },
           "configurations": {
             "production": {

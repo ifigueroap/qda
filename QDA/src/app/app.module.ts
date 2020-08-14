@@ -31,7 +31,7 @@ export interface IAppState {
     , NgxElectronModule
     , SidebarModule.forRoot()
     , NgReduxModule
-    , FormsModule
+    , FormsModule    
   ],
   providers: [
     StatusBar,
