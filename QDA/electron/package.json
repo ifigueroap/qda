@@ -8,7 +8,7 @@
     "electron:start": "npm run build && electron ./",
     "electron:pack": "npm run build && electron-builder build --dir",
     "electron:build-windows": "npm run build && electron-builder build --windows",
-    "electron:build-linux": "npm run build && electron-builder build --linux",
+    "electron:build-linux": "npm run build && electron-builder build --linux deb",
     "electron:build-mac": "npm run build && electron-builder build --mac"
   },
   "dependencies": {
@@ -23,11 +23,15 @@
     "capacitor",
     "electron"
   ],
-  "author": "",
-  "license": "MIT",
+  "author": {
+    "name": "QDA Team",
+    "email": "ifigueroap@gmail.com"
+  },
+  "license": "GPLv3",
+  "homepage": "https://cybre.dev",
   "build": {
     "appId": "com.example.capacitor-app",
-    "productName": "Capacitor App",
+    "productName": "QDA",
     "files": [
       "assets/*",
       "build/index.js",
